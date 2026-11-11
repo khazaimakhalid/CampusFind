@@ -1,6 +1,7 @@
 
 import express from 'express';
 import cors from 'cors';
+import connectDB from './db/index.js';
 
 import userRouter from './routes/user.routes.js';
 import itemRouter from './routes/item.routes.js';
@@ -30,7 +31,14 @@ app.get('/api/v1/healthcheck', (req, res) => {
     message: 'CampusFind API is running'
   });
 });
-
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/items', itemRouter);
 app.use('/api/v1/found-requests', foundRequestRouter);
