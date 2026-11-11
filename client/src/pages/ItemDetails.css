@@ -1,0 +1,66 @@
+
+.details-section {
+  width: min(100% - 40px, 760px);
+  margin: 42px auto 64px;
+}
+
+.details-card {
+  margin-top: 18px;
+  padding: clamp(24px, 5vw, 38px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.details-card h2 {
+  margin: 10px 0 18px;
+  color: var(--color-text);
+  font-size: clamp(1.7rem, 4vw, 2.2rem);
+  font-weight: 750;
+  letter-spacing: -0.045em;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.details-card p {
+  margin: 11px 0;
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.details-card > .primary-btn {
+  margin-top: 16px;
+}
+
+.found-message {
+  margin-top: 18px;
+  color: var(--color-success);
+}
+
+.found-contact-section {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid #dfe6fb;
+  border-radius: var(--radius-md);
+  background: #f7f8ff;
+}
+
+.found-contact-section h3 {
+  margin: 0;
+  font-size: 1.12rem;
+}
+
+.found-contact-section > div {
+  display: inline-flex;
+  margin: 5px 8px 0 0;
+}
+
+@media (max-width: 560px) {
+  .details-section {
+    width: min(100% - 30px, 460px);
+    margin: 28px auto 44px;
+  }
+}

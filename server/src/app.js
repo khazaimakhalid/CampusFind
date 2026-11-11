@@ -1,0 +1,53 @@
+
+import express from 'express';
+import cors from 'cors';
+
+import userRouter from './routes/user.routes.js';
+import itemRouter from './routes/item.routes.js';
+import foundRequestRouter from './routes/foundRequest.routes.js';
+import { errorHandler } from './middlewares/error.middleware.js';
+import uploadRouter from './routes/upload.routes.js';
+
+const app = express();
+
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://192.168.100.12:5173'
+  ]
+}));
+
+
+app.use(express.json({ limit: '16kb' }));
+app.use(express.urlencoded({ extended: true, limit: '16kb' }));
+
+app.get('/api/v1/healthcheck', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'CampusFind API is running'
+  });
+});
+
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/items', itemRouter);
+app.use('/api/v1/found-requests', foundRequestRouter);
+app.use('/api/v1/uploads', uploadRouter);
+app.post('/api/v1/test', (req, res) => {
+  res.json({
+    success: true,
+    message: 'POST route is working'
+  });
+});
+
+// Handle unknown routes
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Route not found: ${req.method} ${req.originalUrl}`
+  });
+});
+
+// Global error handler must be registered last
+app.use(errorHandler);
+
+export default app;
